@@ -20,17 +20,34 @@ void setup() {
 
 long oldPosition  = 0;
 bool playing = false;
-int sensitivity = 5;
+int bowingSensitivity = 5;
 unsigned long myTime = millis();
-int checkTime = 100;
+int timingResolution = 100;
+int quiet = 100;
+int medium = 500;
+int loud = 1000;
 
 void loop() {
   long newPosition = myEnc.read();
   unsigned long timeNow = millis();
   
-  if (timeNow - myTime > checkTime) {
+  if (timeNow - myTime > timingResolution) {
+
+    long distanceTravelled = newPosition - oldPosition;
+
+    if (distanceTravelled < 0) {
+      distanceTravelled = distanceTravelled * -1;
+    }
+    // Serial.println(distanceTravelled);
     
-    if (newPosition > (oldPosition + sensitivity) || newPosition < (oldPosition - sensitivity)) {
+    if (distanceTravelled > bowingSensitivity) {
+      if (distanceTravelled < medium) {
+        Serial.println("quiet");
+      } else if (distanceTravelled < loud) {
+        Serial.println("medium");
+      } else {
+        Serial.println("loud");
+      }
       // Serial.print("new position = ");
       // Serial.println(newPosition);
       // Serial.print("x travel = ");
