@@ -22,27 +22,31 @@ long oldPosition  = 0;
 bool playing = false;
 int sensitivity = 5;
 unsigned long myTime = millis();
+int checkTime = 100;
 
 void loop() {
   long newPosition = myEnc.read();
-  if (newPosition > (oldPosition + sensitivity) || newPosition < (oldPosition - sensitivity)) {
-    unsigned long timeNow = millis();
-    if (timeNow - myTime > 100) {
-        Serial.println("a tenth of a second has passed");
-        Serial.print("x travel = ");
-        Serial.println(newPosition - oldPosition);
-        myTime = millis();
-    }
-    oldPosition = newPosition;
-    // Serial.println(newPosition);
-    if (!playing) {
+  unsigned long timeNow = millis();
+  
+  if (timeNow - myTime > checkTime) {
+    
+    if (newPosition > (oldPosition + sensitivity) || newPosition < (oldPosition - sensitivity)) {
+      // Serial.print("new position = ");
+      // Serial.println(newPosition);
+      // Serial.print("x travel = ");
+      // Serial.println(newPosition - oldPosition);
+      myTime = millis();
+      oldPosition = newPosition;
+
+      if (!playing) {
         playing = true;
         Serial.println("playing");
-    }
-  } else {
-    if (playing) {
-        playing = false;
-        Serial.println("stopped");
+      }
+    } else {
+      if (playing) {
+          playing = false;
+          Serial.println("stopped");
+        }
     }
   }
 }
