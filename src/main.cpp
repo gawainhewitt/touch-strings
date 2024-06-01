@@ -56,7 +56,7 @@ for (uint8_t i=0; i < numberOfSensors; i++) {
 
 lasttouched1 = currtouched1;
 
-readBowing();
+readBowingDirection();
 
 return;
 }

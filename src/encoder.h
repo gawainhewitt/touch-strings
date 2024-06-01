@@ -8,50 +8,50 @@ Encoder myEnc(14, 15);
 //   avoid using pins with LEDs attached
 
 long oldPosition  = 0;
-bool playing = false;
-int bowingSensitivity = 5;
 unsigned long myTime = millis();
 unsigned long timingResolution = 100;
-int quiet = 100;
-int medium = 500;
-int loud = 1000;
+bool direction = 0;
+bool change = 0;
+long sensorSensitivity = 2;
 
-void readBowing() {
+void readBowingDirection() {
   long newPosition = myEnc.read();
   unsigned long timeNow = millis();
+  bool checkChange = 0;
   
-  if (timeNow - myTime > timingResolution) {
+  if (timeNow - myTime > timingResolution) { // if it's been longer than timing resolution
 
-    long distanceTravelled = newPosition - oldPosition;
+    long distanceTravelled = newPosition - oldPosition; // read the sensor and call the answer distance travelled
 
-    if (distanceTravelled < 0) {
-      distanceTravelled = distanceTravelled * -1;
+    // Serial.println((String) "distance travelled " + distanceTravelled);
+
+    if (direction == 1) {
+      if (distanceTravelled < 0 - sensorSensitivity) {
+        direction = 0;
+        checkChange = 1;
+      } else if (distanceTravelled > 0 + sensorSensitivity) {
+        checkChange = 0;
+      }
+    } else {
+      if (distanceTravelled > 0 + sensorSensitivity) {
+        direction = 1;
+        checkChange = 1;
+      } else if (distanceTravelled < 0 - sensorSensitivity) {
+        checkChange = 0;
+      }
     }
-    Serial.println(distanceTravelled);
+
+    if (checkChange != change) {
+      // Serial.println((String) "change " + checkChange);
+      // Serial.println((String) "direction " + direction);
+      change = checkChange;
+    }
+
+    if (change) {
+      Serial.println("Change!!!");
+    }
+    
     oldPosition = newPosition;
     myTime = millis();
-
-    // if (distanceTravelled > bowingSensitivity) {
-    //   if (distanceTravelled < medium) {
-    //     Serial.println("quiet");
-    //   } else if (distanceTravelled < loud) {
-    //     Serial.println("medium");
-    //   } else {
-    //     Serial.println("loud");
-    //   }
-      
-    //   myTime = millis();
-    //   oldPosition = newPosition;
-
-    //   if (!playing) {
-    //     playing = true;
-    //     Serial.println("playing");
-    //   }
-    // } else {
-    //   if (playing) {
-    //       playing = false;
-    //       Serial.println("stopped");
-    //     }
-    // }
   }
 }
