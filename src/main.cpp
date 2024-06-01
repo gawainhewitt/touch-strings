@@ -12,6 +12,7 @@ https://github.com/gawainhewitt
 #include "mpr121.h"
 #include "wavetable.h"
 #include "reboot.h"
+#include "encoder.h"
 
 void setup() {
 Serial.begin(9600);
@@ -54,5 +55,10 @@ for (uint8_t i=0; i < numberOfSensors; i++) {
   }
 
 lasttouched1 = currtouched1;
+
+readBowing();
+
 return;
 }
+
+
