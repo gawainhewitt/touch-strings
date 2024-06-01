@@ -1,4 +1,4 @@
-#include "Oboe_samples.h"
+#include "Violin_samples.h"
 
 #include <Audio.h>
 #include <Wire.h>
@@ -71,7 +71,7 @@ void setupAudio() {
     sgtl5000_1.enable();
     sgtl5000_1.volume(0.5);
 
-    wavetable1.setInstrument(Oboe);
+    wavetable1.setInstrument(Violin);
 
     int wavetableAmplitude = 1;
 
