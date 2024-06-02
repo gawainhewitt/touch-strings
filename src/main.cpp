@@ -34,8 +34,6 @@ void loop() {
 
 // ***** if no software volume control then set gain
 
-float gain = 1.0;
-
 amp1.gain(gain);
 
 currtouched1 = mprBoard_A.touched();
@@ -56,7 +54,7 @@ for (uint8_t i=0; i < numberOfSensors; i++) {
 
 lasttouched1 = currtouched1;
 
-readBowingDirection();
+readBowing();
 
 return;
 }
