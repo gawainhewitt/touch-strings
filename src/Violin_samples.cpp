@@ -14852,18 +14852,18 @@ PROGMEM static const uint32_t sample_0_Violin_violing3norm[118784] = {
 static const AudioSynthWavetable::sample_data Violin_samples[1] = {
 	{
 		(int16_t*)sample_0_Violin_violing3norm, // sample
-		false, // LOOP
+		true, // LOOP
 		18, // LENGTH_BITS
 		(1 << (32 - 18)) * WAVETABLE_CENTS_SHIFT(0) * 48000.0 / WAVETABLE_NOTE_TO_FREQUENCY(55) / AUDIO_SAMPLE_RATE_EXACT + 0.5, // PER_HERTZ_PHASE_INCREMENT
 		((uint32_t)237518 - 1) << (32 - 18), // MAX_PHASE
-		((uint32_t)237517 - 1) << (32 - 18), // LOOP_PHASE_END
-		(((uint32_t)237517 - 1) << (32 - 18)) - (((uint32_t)0 - 1) << (32 - 18)), // LOOP_PHASE_LENGTH
-		uint16_t(UINT16_MAX * WAVETABLE_DECIBEL_SHIFT(0)), // INITIAL_ATTENUATION_SCALAR
+		((uint32_t)106382 - 1) << (32 - 18), // LOOP_PHASE_END
+		(((uint32_t)106382 - 1) << (32 - 18)) - (((uint32_t)98322 - 1) << (32 - 18)), // LOOP_PHASE_LENGTH
+		uint16_t(UINT16_MAX * WAVETABLE_DECIBEL_SHIFT(-0.0)), // INITIAL_ATTENUATION_SCALAR
 		uint32_t(0.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // DELAY_COUNT
 		uint32_t(1.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // ATTACK_COUNT
 		uint32_t(0.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // HOLD_COUNT
 		uint32_t(1.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // DECAY_COUNT
-		uint32_t(1.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // RELEASE_COUNT
+		uint32_t(100021.52 * AudioSynthWavetable::SAMPLES_PER_MSEC / AudioSynthWavetable::ENVELOPE_PERIOD + 0.5), // RELEASE_COUNT
 		int32_t((1.0 - WAVETABLE_DECIBEL_SHIFT(0.0)) * AudioSynthWavetable::UNITY_GAIN), // SUSTAIN_MULT
 		uint32_t(0.00 * AudioSynthWavetable::SAMPLES_PER_MSEC / (2 * AudioSynthWavetable::LFO_PERIOD)), // VIBRATO_DELAY
 		uint32_t(8.2 * AudioSynthWavetable::LFO_PERIOD * (UINT32_MAX / AUDIO_SAMPLE_RATE_EXACT)), // VIBRATO_INCREMENT

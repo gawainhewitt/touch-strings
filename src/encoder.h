@@ -15,16 +15,42 @@ unsigned long lastChange = millis();
 bool change = 0;
 long sensorSensitivity = 2;
 
-unsigned long fast = 400; // so if this or faster then highest volume
+unsigned long fast = 200; // so if this or faster then highest volume
 // unsigned long medium = 800; // inbetween it would be cool to have the volume changing between those two extremes, mapped to where in between it was
-unsigned long slow = 1500; // and if this or lower then lowest volume
-unsigned long off = 2500;
+unsigned long slow = 2000; // and if this or lower then lowest volume
+unsigned long off = 3500;
 
-float gain = 1.0;
+unsigned long volumeRampTime = millis();
+unsigned long volumeRampResolution = 5;
+float gain = 0;
+float bowVolume = 0;
 
 
 void changeVolume(float volume) {
-  gain = volume;
+  bowVolume = volume;
+}
+
+void rampVolume() {
+  unsigned long timeNow = millis();
+  unsigned long timeElapsed = timeNow - volumeRampTime;
+  
+  if (timeElapsed > volumeRampResolution) {
+    if (bowVolume == gain) {
+      return;
+    }
+    if (bowVolume < gain) {
+      gain = gain - 0.01;
+    } else if (bowVolume > gain) {
+      gain = gain + 0.01;
+    }
+
+    // Serial.println(gain);
+    
+    amp1.gain(gain);
+
+    volumeRampTime = timeNow;
+  }
+
 }
 
 
@@ -37,7 +63,7 @@ void changeTime() {
     changeVolume(0.2);
   } else if (timeElapsed > fast) {
     Serial.println("medium change!");
-    int volume = map(timeElapsed, 400, 1500, 0, 80);
+    int volume = map(timeElapsed, fast, slow, 0, 80);
     volume = 100 - volume;
     float volumeConverted = volume;
     volumeConverted = volumeConverted/100;

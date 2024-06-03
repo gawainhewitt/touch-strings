@@ -78,8 +78,10 @@ void setupAudio() {
     wavetable1.amplitude(wavetableAmplitude);
 
     int attackAmount = 3;
+    int releaseAmount  = 1000;
 
     envelope1.attack(attackAmount);
+    envelope1.release(releaseAmount);
 
     freeverb1.roomsize(0.5);
 }

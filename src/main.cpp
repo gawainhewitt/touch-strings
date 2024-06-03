@@ -34,7 +34,7 @@ void loop() {
 
 // ***** if no software volume control then set gain
 
-amp1.gain(gain);
+rampVolume();
 
 currtouched1 = mprBoard_A.touched();
 
