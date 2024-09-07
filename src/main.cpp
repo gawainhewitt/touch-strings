@@ -7,16 +7,35 @@ gawainhewitt.co.uk
 https://github.com/gawainhewitt
 */
 
+
 #include "constants.h"
 #include "synth_wavetable.h"
 #include "mpr121.h"
 #include "wavetable.h"
 #include "reboot.h"
 #include "encoder.h"
+#include "drawMenu.h"
+
+
+// float gain = 0;
+
+#define UP 0
+#define LEFT 1
+#define CENTRE 2
+#define RIGHT 3
+#define DOWN 4
+#define NUM_BUTTONS 5
+
+
+
+
 
 void setup() {
 Serial.begin(9600);
 init_mpr121();
+// setupPins();
+u8g2.begin();
+drawMenu();
 setupAudio();
 pinMode(rebootButton, INPUT_PULLUP);
 pinMode(volumePin, INPUT);
@@ -55,6 +74,12 @@ for (uint8_t i=0; i < numberOfSensors; i++) {
 lasttouched1 = currtouched1;
 
 readBowing();
+
+ if (updateDisplayFlag == true) {
+      drawMenu();            //update the menu
+      updateDisplayFlag = false;
+  }
+
 
 return;
 }
