@@ -10,7 +10,7 @@ https://github.com/gawainhewitt
 
 #include "constants.h"
 #include "synth_wavetable.h"
-#include "mpr121.h"
+#include "touch.h"
 #include "wavetable.h"
 #include "reboot.h"
 #include "encoder.h"
@@ -55,23 +55,41 @@ void loop() {
 
 rampVolume();
 
-currtouched1 = mprBoard_A.touched();
+// currtouched1 = mprBoard_A.touched();
 
 if(digitalRead(rebootButton) == LOW){
     doReboot();
 }
 
-for (uint8_t i=0; i < numberOfSensors; i++) {
-      if ((currtouched1 & _BV(i)) && !(lasttouched1 & _BV(i)) ) {
-      playSound(octave, i);
-      }
+// for (uint8_t i=0; i < numberOfSensors; i++) {
+//       if ((currtouched1 & _BV(i)) && !(lasttouched1 & _BV(i)) ) {
+//       playSound(octave, i);
+//       }
 
-      if (!(currtouched1 & _BV(i)) && (lasttouched1 & _BV(i)) ) {
+//       if (!(currtouched1 & _BV(i)) && (lasttouched1 & _BV(i)) ) {
+//       stopSound(octave, i);
+//     }
+//   }
+
+// lasttouched1 = currtouched1;
+
+MPR121.updateAll();
+
+  for (int i = 0; i < 12; i++) {
+    if (MPR121.isNewTouch(i)) {
+      Serial.print("electrode ");
+      Serial.print(i, DEC);
+      Serial.println(" was just touched");
+      playSound(octave, i);
+
+    } else if (MPR121.isNewRelease(i)) {
+      Serial.print("electrode ");
+      Serial.print(i, DEC);
+      Serial.println(" was just released");
       stopSound(octave, i);
+
     }
   }
-
-lasttouched1 = currtouched1;
 
 readBowing();
 
