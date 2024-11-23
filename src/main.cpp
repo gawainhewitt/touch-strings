@@ -13,7 +13,7 @@ https://github.com/gawainhewitt
 #include "touch.h"
 #include "wavetable.h"
 #include "reboot.h"
-#include "encoder.h"
+#include "encoderFile.h"
 #include "drawMenu.h"
 
 
