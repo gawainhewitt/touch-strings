@@ -15,6 +15,7 @@ https://github.com/gawainhewitt
 #include "reboot.h"
 #include "encoderFile.h"
 #include "drawMenu.h"
+#include "joystick.h"
 
 
 // float gain = 0;
@@ -33,6 +34,7 @@ https://github.com/gawainhewitt
 void setup() {
 Serial.begin(9600);
 init_mpr121();
+setupJoystick();
 // setupPins();
 u8g2.begin();
 drawMenu();
@@ -55,23 +57,11 @@ void loop() {
 
 rampVolume();
 
-// currtouched1 = mprBoard_A.touched();
+// Serial.print(digitalRead(joyButton));
 
 if(digitalRead(rebootButton) == LOW){
     doReboot();
 }
-
-// for (uint8_t i=0; i < numberOfSensors; i++) {
-//       if ((currtouched1 & _BV(i)) && !(lasttouched1 & _BV(i)) ) {
-//       playSound(octave, i);
-//       }
-
-//       if (!(currtouched1 & _BV(i)) && (lasttouched1 & _BV(i)) ) {
-//       stopSound(octave, i);
-//     }
-//   }
-
-// lasttouched1 = currtouched1;
 
 MPR121.updateAll();
 
@@ -92,6 +82,8 @@ MPR121.updateAll();
   }
 
 readBowing();
+
+readJoystick();
 
  if (updateDisplayFlag == true) {
       drawMenu();            //update the menu
