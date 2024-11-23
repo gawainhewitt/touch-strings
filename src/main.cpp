@@ -15,7 +15,6 @@ https://github.com/gawainhewitt
 #include "reboot.h"
 #include "encoderFile.h"
 #include "drawMenu.h"
-#include "joystick.h"
 
 
 // float gain = 0;
@@ -46,6 +45,9 @@ delay(500);
 
 
 void loop() {
+
+readJoystick();
+joyStickActions();
 // ***** uncomment for volume control
 
 // int knob = analogRead(volumePin) - 200; // knob = 0 to 1023
@@ -82,8 +84,6 @@ MPR121.updateAll();
   }
 
 readBowing();
-
-readJoystick();
 
  if (updateDisplayFlag == true) {
       drawMenu();            //update the menu
