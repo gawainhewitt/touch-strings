@@ -64,6 +64,8 @@ byte minorBlues[] = {0, 3, 5, 6, 7, 10, 12, 15, 17, 18, 19, 22};
 
 byte scale[] = {0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19}; // default to major
 
+float mainVolume = 0.75;
+
 int currentScale = 0;
 int numScales = 5;
 
@@ -93,6 +95,10 @@ void setupAudio() {
     envelope1.release(releaseAmount);
 
     freeverb1.roomsize(0.5);
+}
+
+void changeMainVolume() {
+    amp2.gain(mainVolume);
 }
 
 void playSound(int octave, int note) {

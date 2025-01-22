@@ -9,7 +9,7 @@ boolean bigMenu = false;
 boolean updateDisplayFlag = true;
 
 int activeMenuInput = 0;
-byte menuItems = 3;
+byte menuItems = 4;
 
 byte buttonStates[NUM_BUTTONS];
 
@@ -159,21 +159,24 @@ void joyStickActions() {
         keyName = noteNames[keyPosition];
         break;
       case 1:
-      currentScale = currentScale - 1;
+        currentScale = currentScale - 1;
         if (currentScale < 0) {
           currentScale = numScales - 1;
         }
         changeScale(currentScale);
-        // drawMenu();
         break;
       case 2:
-      currentFunction = currentFunction - 1;
+        currentFunction = currentFunction - 1;
         if (currentFunction < 0) {
           currentFunction = numFunctions - 1;
         }
-        // changeSound(currentFunction);
         break;
-      
+      case 3:
+        mainVolume = mainVolume - 0.01;
+        if (mainVolume < 0) {
+          mainVolume = 0;
+        }
+        changeMainVolume();
     }
   }
 
@@ -193,7 +196,7 @@ void joyStickActions() {
   if (buttonStates[RIGHT] == 3) {
     switch (activeMenuInput) {
       case 0:
-      keyPosition = keyPosition + 1;
+        keyPosition = keyPosition + 1;
         if (keyPosition > 11) {
           keyPosition = 0;
         }
@@ -208,12 +211,17 @@ void joyStickActions() {
         changeScale(currentScale);
         break;
       case 2:
-      currentFunction = currentFunction + 1;
+        currentFunction = currentFunction + 1;
         if (currentFunction > numFunctions - 1) {
           currentFunction = 0;
         }
-        // changeSound(currentFunction);
         break;
+      case 3:
+        mainVolume = mainVolume + 0.01;
+        if (mainVolume > 1) {
+          mainVolume = 1;
+        }
+        changeMainVolume();
     }
   }
 

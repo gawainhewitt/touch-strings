@@ -71,6 +71,8 @@ void loop() {
     rampVolume();
   }
 
+
+
   if (updateDisplayFlag == true) {
         drawMenu();            
         updateDisplayFlag = false;
@@ -80,9 +82,7 @@ void loop() {
       doReboot();
   }
 
-  Serial.print("volume: ");
-  Serial.println(gain);
-
+  Serial.println(mainVolume*100);
 }
 
 

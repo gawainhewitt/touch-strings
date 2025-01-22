@@ -26,15 +26,9 @@ void draw() {
     u8g2.print(functionNames[currentFunction]);
 
     u8g2.setCursor(1, 40);
-    
-
-    u8g2.setCursor(1, 50);
-    
-
-    u8g2.setCursor(1, 60);
-    int volumeToPrint = static_cast<int>(gain*100);
+    int volumeToPrint = static_cast<int>(mainVolume*100);
     u8g2.print("Volume: "); u8g2.print(volumeToPrint);
-    
+  
     u8g2.drawFrame(0, activeMenuInput * 10, 127, 10);
   }
 }
