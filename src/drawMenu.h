@@ -1,6 +1,4 @@
 #include <bus1_U8g2lib.h>  // my bus1 adaptation of https://github.com/olikraus/u8g2/blob/master/cppsrc/U8g2lib.h - manages I2C display
-#include "joystick.h"
-
 
 U8G2_SSD1306_128X64_NONAME_2_HW_I2C u8g2(U8G2_R2, /* reset=*/ U8X8_PIN_NONE);   //page buffer = 128bytes (_1_ = 128, _2_ = 256, _F_ = 1024)
 
@@ -24,8 +22,8 @@ void draw() {
     u8g2.print(scaleTypeName);
 
     u8g2.setCursor(1, 30);
-    u8g2.print("Sound: "); 
-    u8g2.print(currentSound);
+    u8g2.print("Function: "); 
+    u8g2.print(functionNames[currentFunction]);
 
     u8g2.setCursor(1, 40);
     

@@ -4,8 +4,9 @@
 //   Best Performance: both pins have interrupt capability
 //   Good Performance: only the first pin has interrupt capability
 //   Low Performance:  neither pin has interrupt capability
-Encoder myEnc(14, 15);
 //   avoid using pins with LEDs attached
+
+Encoder myEnc(14, 15);
 
 long oldPosition  = 0;
 unsigned long readBowTime = millis();
@@ -40,6 +41,9 @@ void rampVolume() {
     }
     if (bowVolume < gain) {
       gain = gain - 0.01;
+      if (gain < 0.01) {
+        gain = 0;
+      }
     } else if (bowVolume > gain) {
       gain = gain + 0.01;
     }

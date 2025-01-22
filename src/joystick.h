@@ -58,10 +58,10 @@ void updateButtonState(int button, int buttonState) {
     //2-on
     //1-momentary off
     // Serial.println(buttonStates);
-    Serial.print("button ");
-    Serial.print(button);
-    Serial.print(": state is ");
-    Serial.println(buttonStates[button]);
+    // Serial.print("button ");
+    // Serial.print(button);
+    // Serial.print(": state is ");
+    // Serial.println(buttonStates[button]);
 }
 
 void readButton() {
@@ -167,11 +167,11 @@ void joyStickActions() {
         // drawMenu();
         break;
       case 2:
-      currentSound = currentSound - 1;
-        if (currentSound < 0) {
-          currentSound = numSounds - 1;
+      currentFunction = currentFunction - 1;
+        if (currentFunction < 0) {
+          currentFunction = numFunctions - 1;
         }
-        // changeSound(currentSound);
+        // changeSound(currentFunction);
         break;
       
     }
@@ -180,12 +180,12 @@ void joyStickActions() {
   if (buttonStates[CENTRE] == 3) {
     switch (activeMenuInput) {
       case 0:
-        Serial.print("centre menu: ");
-        Serial.println(activeMenuInput);
+        // Serial.print("centre menu: ");
+        // Serial.println(activeMenuInput);
         break;
       case 4:
-        Serial.print("centre menu: ");
-        Serial.println(activeMenuInput);
+        // Serial.print("centre menu: ");
+        // Serial.println(activeMenuInput);
         break;
     }
   }
@@ -208,11 +208,11 @@ void joyStickActions() {
         changeScale(currentScale);
         break;
       case 2:
-      currentSound = currentSound + 1;
-        if (currentSound > numSounds - 1) {
-          currentSound = 0;
+      currentFunction = currentFunction + 1;
+        if (currentFunction > numFunctions - 1) {
+          currentFunction = 0;
         }
-        // changeSound(currentSound);
+        // changeSound(currentFunction);
         break;
     }
   }

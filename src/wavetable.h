@@ -8,23 +8,31 @@
 
 
 
+#include <Audio.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include <SerialFlash.h>
+
 // GUItool: begin automatically generated code
-AudioSynthWavetable      wavetable1;     //xy=287,516
-AudioEffectEnvelope      envelope1;      //xy=425,516
-AudioAmplifier           reverb_send;           //xy=517,399
-AudioEffectFreeverb      freeverb1;      //xy=635,432
-AudioMixer4              mixer1;         //xy=834,459
-AudioAmplifier           amp1;           //xy=923,651
-AudioOutputI2S           i2s1;           //xy=1202,720
+AudioSynthWavetable      wavetable1;     //xy=121.10000610351562,205
+AudioAmplifier           reverb_send;    //xy=199.9889373779297,142.44447326660156
+AudioEffectEnvelope      envelope1;      //xy=259.1000061035156,205
+AudioEffectFreeverb      freeverb1;      //xy=353.5444755554199,142.111083984375
+AudioMixer4              mixer1;         //xy=500.3221740722656,166.88884735107422
+AudioAmplifier           amp1;           //xy=628.2110748291016,166.6666717529297
+AudioAmplifier           amp2;           //xy=751.2221984863281,166.77777862548828
+AudioOutputI2S           i2s1;           //xy=886.0999221801758,166.77775382995605
 AudioConnection          patchCord1(wavetable1, envelope1);
-AudioConnection          patchCord2(envelope1, 0, mixer1, 1);
-AudioConnection          patchCord3(envelope1, reverb_send);
-AudioConnection          patchCord4(reverb_send, freeverb1);
+AudioConnection          patchCord2(reverb_send, freeverb1);
+AudioConnection          patchCord3(envelope1, 0, mixer1, 1);
+AudioConnection          patchCord4(envelope1, reverb_send);
 AudioConnection          patchCord5(freeverb1, 0, mixer1, 0);
 AudioConnection          patchCord6(mixer1, amp1);
-AudioConnection          patchCord7(amp1, 0, i2s1, 0);
-AudioConnection          patchCord8(amp1, 0, i2s1, 1);
-AudioControlSGTL5000     sgtl5000_1;     //xy=515,851
+AudioConnection          patchCord7(amp1, amp2);
+AudioConnection          patchCord8(amp2, 0, i2s1, 0);
+AudioConnection          patchCord9(amp2, 0, i2s1, 1);
+AudioControlSGTL5000     sgtl5000_1;     //xy=236.87777709960938,290.0000228881836
 // GUItool: end automatically generated code
 
 
@@ -59,8 +67,9 @@ byte scale[] = {0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19}; // default to major
 int currentScale = 0;
 int numScales = 5;
 
-int currentSound = 0;
-int numSounds = 3;
+int currentFunction = 0;
+int numFunctions = 3;
+const String functionNames[]={"Touch", "Bowing", "Both" };
 
 String scaleTypeName = "Major";
 

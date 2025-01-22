@@ -2,6 +2,11 @@
 A musical instrument based on a violin
 
 
+to allow for bowing type to change
+
+use current sound menu item? - 
+
+
 so i feel like i want to measure distance travelled in one direction at a time
 
 so if you keep spinning in one direction there has to be an amount that is maximum velocity and then we stay there 
